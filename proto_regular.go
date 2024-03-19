@@ -1,4 +1,4 @@
-package convptr
+package ccvt
 
 import (
 	"google.golang.org/protobuf/types/known/wrapperspb"

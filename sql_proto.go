@@ -1,4 +1,4 @@
-package convptr
+package ccvt
 
 import (
 	"database/sql"
