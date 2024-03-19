@@ -1,50 +1,48 @@
 package convptr
 
-import (
-	"github.com/golang/protobuf/ptypes/wrappers"
-)
+import "google.golang.org/protobuf/types/known/wrapperspb"
 
-func ToProtoStringWrapper(value *string) *wrappers.StringValue {
+func ToProtoStringWrapper(value *string) *wrapperspb.StringValue {
 	if value != nil {
-		return &wrappers.StringValue{Value: *value}
+		return &wrapperspb.StringValue{Value: *value}
 	}
 
 	return nil
 }
 
-func ToProtoInt32Wrapper(value *int32) *wrappers.Int32Value {
+func ToProtoInt32Wrapper(value *int32) *wrapperspb.Int32Value {
 	if value != nil {
-		return &wrappers.Int32Value{Value: *value}
+		return &wrapperspb.Int32Value{Value: *value}
 	}
 
 	return nil
 }
 
-func ToProtoFloatWrapper(value *float32) *wrappers.FloatValue {
+func ToProtoFloatWrapper(value *float32) *wrapperspb.FloatValue {
 	if value != nil {
-		return &wrappers.FloatValue{Value: *value}
+		return &wrapperspb.FloatValue{Value: *value}
 	}
 
 	return nil
 }
 
-func ToProtoFloat64Wrapper(value *float64) *wrappers.FloatValue {
+func ToProtoFloat64Wrapper(value *float64) *wrapperspb.FloatValue {
 	if value != nil {
-		return &wrappers.FloatValue{Value: float32(*value)}
+		return &wrapperspb.FloatValue{Value: float32(*value)}
 	}
 
 	return nil
 }
 
-func ToProtoBoolWrapper(value *bool) *wrappers.BoolValue {
+func ToProtoBoolWrapper(value *bool) *wrapperspb.BoolValue {
 	if value != nil {
-		return &wrappers.BoolValue{Value: *value}
+		return &wrapperspb.BoolValue{Value: *value}
 	}
 
 	return nil
 }
 
-func FromProtoStringWrapper(value *wrappers.StringValue) *string {
+func FromProtoStringWrapper(value *wrapperspb.StringValue) *string {
 	if value != nil {
 		return &value.Value
 	}
@@ -52,7 +50,7 @@ func FromProtoStringWrapper(value *wrappers.StringValue) *string {
 	return nil
 }
 
-func FromProtoInt32Wrapper(value *wrappers.Int32Value) *int32 {
+func FromProtoInt32Wrapper(value *wrapperspb.Int32Value) *int32 {
 	if value != nil {
 		return &value.Value
 	}
@@ -60,7 +58,7 @@ func FromProtoInt32Wrapper(value *wrappers.Int32Value) *int32 {
 	return nil
 }
 
-func FromProtoFloatWrapper(value *wrappers.FloatValue) *float32 {
+func FromProtoFloatWrapper(value *wrapperspb.FloatValue) *float32 {
 	if value != nil {
 		return &value.Value
 	}
@@ -68,7 +66,7 @@ func FromProtoFloatWrapper(value *wrappers.FloatValue) *float32 {
 	return nil
 }
 
-func FromProtoFloat64Wrapper(value *wrappers.FloatValue) *float64 {
+func FromProtoFloat64Wrapper(value *wrapperspb.FloatValue) *float64 {
 	if value != nil {
 		val := float64(value.Value)
 		return &val
@@ -77,7 +75,7 @@ func FromProtoFloat64Wrapper(value *wrappers.FloatValue) *float64 {
 	return nil
 }
 
-func FromProtoBoolWrapper(value *wrappers.BoolValue) *bool {
+func FromProtoBoolWrapper(value *wrapperspb.BoolValue) *bool {
 	if value != nil {
 		return &value.Value
 	}
