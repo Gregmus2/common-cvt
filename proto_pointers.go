@@ -18,6 +18,14 @@ func ToProtoInt32Wrapper(value *int32) *wrapperspb.Int32Value {
 	return nil
 }
 
+func ToProtoInt64Wrapper(value *int64) *wrapperspb.Int64Value {
+	if value != nil {
+		return &wrapperspb.Int64Value{Value: *value}
+	}
+
+	return nil
+}
+
 func ToProtoFloatWrapper(value *float32) *wrapperspb.FloatValue {
 	if value != nil {
 		return &wrapperspb.FloatValue{Value: *value}
@@ -51,6 +59,14 @@ func FromProtoStringWrapper(value *wrapperspb.StringValue) *string {
 }
 
 func FromProtoInt32Wrapper(value *wrapperspb.Int32Value) *int32 {
+	if value != nil {
+		return &value.Value
+	}
+
+	return nil
+}
+
+func FromProtoInt64Wrapper(value *wrapperspb.Int64Value) *int64 {
 	if value != nil {
 		return &value.Value
 	}
