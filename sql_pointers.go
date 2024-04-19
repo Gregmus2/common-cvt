@@ -39,6 +39,14 @@ func FromSQLInt(value sql.NullInt32) *int32 {
 	return &value.Int32
 }
 
+func FromSQLInt64(value sql.NullInt64) *int64 {
+	if !value.Valid {
+		return nil
+	}
+
+	return &value.Int64
+}
+
 func FromSQLBool(value sql.NullBool) *bool {
 	if !value.Valid {
 		return nil
@@ -77,6 +85,14 @@ func ToSQLInt(value *int32) sql.NullInt32 {
 	}
 
 	return sql.NullInt32{Int32: *value, Valid: true}
+}
+
+func ToSQLInt64(value *int64) sql.NullInt64 {
+	if value == nil {
+		return sql.NullInt64{}
+	}
+
+	return sql.NullInt64{Int64: *value, Valid: true}
 }
 
 func ToSQLBool(value *bool) sql.NullBool {
