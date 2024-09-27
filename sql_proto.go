@@ -2,6 +2,7 @@ package ccvt
 
 import (
 	"database/sql"
+	"github.com/google/uuid"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 	"strings"
 	"time"
@@ -80,6 +81,14 @@ func FromSQLTimeToProto(value sql.NullTime) *wrapperspb.Int64Value {
 	return &wrapperspb.Int64Value{Value: value.Time.Unix()}
 }
 
+func FromSQLUUIDToProto(value uuid.NullUUID) *wrapperspb.StringValue {
+	if !value.Valid {
+		return nil
+	}
+
+	return &wrapperspb.StringValue{Value: value.UUID.String()}
+}
+
 func ToSQLStringFromProto(value *wrapperspb.StringValue) sql.NullString {
 	if value == nil {
 		return sql.NullString{}
@@ -126,4 +135,12 @@ func ToSQLTimeFromProto(value *wrapperspb.Int64Value) sql.NullTime {
 	}
 
 	return sql.NullTime{Time: time.Unix(value.Value, 0), Valid: true}
+}
+
+func ToSQLUUIDFromProto(value *wrapperspb.StringValue) uuid.NullUUID {
+	if value == nil || uuid.Validate(value.Value) != nil {
+		return uuid.NullUUID{}
+	}
+
+	return uuid.NullUUID{UUID: uuid.MustParse(value.Value), Valid: true}
 }
