@@ -1,6 +1,9 @@
 package ccvt
 
-import "google.golang.org/protobuf/types/known/wrapperspb"
+import (
+	"google.golang.org/protobuf/types/known/wrapperspb"
+	"time"
+)
 
 func ToProtoStringWrapper(value *string) *wrapperspb.StringValue {
 	if value != nil {
@@ -50,6 +53,14 @@ func ToProtoBoolWrapper(value *bool) *wrapperspb.BoolValue {
 	return nil
 }
 
+func ToProtoTimeWrapper(value *time.Time) *wrapperspb.Int64Value {
+	if value != nil {
+		return &wrapperspb.Int64Value{Value: value.Unix()}
+	}
+
+	return nil
+}
+
 func FromProtoStringWrapper(value *wrapperspb.StringValue) *string {
 	if value != nil {
 		return &value.Value
@@ -94,6 +105,15 @@ func FromProtoFloat64Wrapper(value *wrapperspb.FloatValue) *float64 {
 func FromProtoBoolWrapper(value *wrapperspb.BoolValue) *bool {
 	if value != nil {
 		return &value.Value
+	}
+
+	return nil
+}
+
+func FromProtoTimeWrapper(value *wrapperspb.Int64Value) *time.Time {
+	if value != nil {
+		t := time.Unix(value.Value, 0)
+		return &t
 	}
 
 	return nil
